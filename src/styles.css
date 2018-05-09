@@ -1,0 +1,42 @@
+:root{
+    --arrow-color: rgba(255,255,255,0.6);
+}
+
+.slideshow{
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slideshow__image{
+    display: inline;
+    width: 100%;
+}
+
+.slideshow__arrows{
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    top: calc(50% - 1rem);
+    font-size: 14rem;
+}
+
+.slideshow__arrows .fa-angle-left{
+    position: absolute;
+    left: 0;
+    color:var(--arrow-color);
+}
+
+.slideshow__arrows .fa-angle-right{
+    position: absolute;
+    right: 0;
+    color:var(--arrow-color);
+}
+
+.slideshow__arrows .fa-angle-left:hover,
+.slideshow__arrows .fa-angle-right:hover{
+    color: white;
+}
