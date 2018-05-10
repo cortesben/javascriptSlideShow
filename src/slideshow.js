@@ -1,4 +1,45 @@
+/**
+ * Creates Arrows
+ * creates a left arrow
+ * creates a right arrow
+ * appends to slideshow element node passed in
+ * @param {node} element 
+ */
+function createArrows(element) {
+    // arrow container
+    let arrowsContainer = document.createElement('div');
+    arrowsContainer.classList.add('slideshow__arrows');
 
+    // left Arrow
+    let arrowLeft = document.createElement('i');
+    arrowLeft.classList.add('fas');
+    arrowLeft.classList.add('fa-angle-left');
+    arrowsContainer.appendChild(arrowLeft);
+
+    // right Arrow
+    let arrowRight = document.createElement('i');
+    arrowRight.classList.add('fas');
+    arrowRight.classList.add('fa-angle-right');
+    arrowsContainer.appendChild(arrowRight);
+
+    // add to sliderShow
+    element.appendChild(arrowsContainer);
+}
+
+/**
+ * Creates an img elment for each item in images array
+ * appends to slideshow element node passed in
+ * @param {node} element 
+ * @param {array} pictures 
+ */
+function createSlides(element, pictures) {
+    pictures.forEach(item => {
+        let image = new Image(); //shorthand for document.createElement('img')
+        image.src = item;
+        image.classList.add('slideshow__image');
+        element.appendChild(image);
+    });
+}
 /**
  * slideShow will create a slide show based on images
  * first param is the element you want the slide show to apear in
@@ -7,55 +48,103 @@
  * @param {*} pictures 
  */
 function sliderShow(element, pictures) {
-    let imageElements;
-    let arrowLeft;
-    let arrowRight;
 
-    function createArrows() {
-        // arrow container
-        let arrowsContainer = document.createElement('div');
-        arrowsContainer.classList.add('slideshow__arrows');
+    createArrows(element);
+    createSlides(element, pictures);
 
-        // left Arrow
-        let arrowLeft = document.createElement('i');
-        arrowLeft.classList.add('fas');
-        arrowLeft.classList.add('fa-angle-left');
-        arrowsContainer.appendChild(arrowLeft);
+    // select new elements
+    const imageElements = document.querySelectorAll('.slideshow > .slideshow__image');
+    const arrowLeft = document.querySelector('.slideshow__arrows > .fa-angle-left');
+    const arrowRight = document.querySelector('.slideshow__arrows > .fa-angle-right');
 
-        // right Arrow
-        let arrowRight = document.createElement('i');
-        arrowRight.classList.add('fas');
-        arrowRight.classList.add('fa-angle-right');
-        arrowsContainer.appendChild(arrowRight);
+    let active = null;
+    let previous = null;
+    let next = null;
+    let lastIndex = null;
+    let isEndOfList = null;
+    let isStartOfList = null;
 
-        // add to sliderShow
-        element.appendChild(arrowsContainer);
+    let classes = {
+        active: 'slideshow__image--active',
+        previous: 'slideshow__image--previous',
+        next: 'slideshow__image--next',
     }
 
-    function createSlides(){
-        pictures.forEach(item => {
-            let image = new Image(); //shorthand for document.createElement('img')
-            image.src = item;
-            image.classList.add('slideshow__image');
-            element.appendChild(image);
-        });
+    function startListCount() {
+        active = 0;
+        previous = active - 1;
+        next = active + 1;
+
+        imageElements[active].classList.add(classes.active);
+        imageElements[next].classList.add(classes.next);
+
+        lastIndex = imageElements.length - 1;
     }
 
-    createArrows();
-    createSlides();
+    startListCount();
 
-    imageElements = document.querySelectorAll('.slideshow > .slideshow__image');
-    arrowLeft = document.querySelector('.slideshow__arrows > .fa-angle-left');
-    arrowRight = document.querySelector('.slideshow__arrows > .fa-angle-right');
-    console.log(element);
-    console.log(arrowLeft);
-    console.log(arrowRight);
+    function setListStartEnd() {
+        isStartOfList = imageElements[0].classList.contains(classes.active);
+        isEndOfList = imageElements[lastIndex].classList.contains(classes.active);
+    }
 
+    function moveItem(direction) {
+
+        // remove state
+        imageElements[active].classList.remove(classes.active);
+
+        if (!isStartOfList) {
+            imageElements[previous].classList.remove(classes.previous);
+        }
+
+        if (!isEndOfList) {
+            imageElements[next].classList.remove(classes.next);
+        }
+
+        /**
+         * set active
+         * set previous
+         * set next
+         */
+        active = active + direction;
+        previous = active - 1;
+        next = active + 1;
+
+        imageElements[active].classList.add(classes.active);
+
+        // after we set active we check to see what part of the list we are in
+        setListStartEnd();
+
+        if (!isStartOfList) {
+            imageElements[previous].classList.add(classes.previous);
+        }
+
+        if (!isEndOfList) {
+            imageElements[next].classList.add(classes.next);
+        }
+
+
+        console.log(imageElements[active]);
+    }
+
+    /** Move left */
     arrowLeft.addEventListener('click', (e) => {
-        console.log(e);
+        setListStartEnd();
+
+        if (isStartOfList) { return; }
+
+        moveItem(-1);
+
     });
+
+    /** Move right */
     arrowRight.addEventListener('click', (e) => {
-        console.log(e);
+        setListStartEnd();
+
+        if (isEndOfList) { return; }
+
+        moveItem(+1)
+
     });
 }
 

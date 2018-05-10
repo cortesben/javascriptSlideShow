@@ -1,5 +1,5 @@
 :root{
-    --arrow-color: rgba(255,255,255,0.6);
+    --arrow-color: rgba(255,255,255,0.4);
 }
 
 .slideshow{
@@ -11,8 +11,15 @@
 }
 
 .slideshow__image{
-    display: inline;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
+    opacity: 0;
+    object-fit: cover;
+    object-position: 0 100%;
+    transition: all 250ms ease-out;
 }
 
 .slideshow__arrows{
@@ -22,6 +29,19 @@
     width: 100%;
     top: calc(50% - 1rem);
     font-size: 14rem;
+}
+
+/* css states */
+.slideshow__image.slideshow__image--active{
+    opacity: 1;
+}
+.slideshow__image.slideshow__image--previous{
+    transform: translateX(-100%);
+    opacity: 1;
+}
+.slideshow__image.slideshow__image--next{
+    transform: translateX(+100%);
+    opacity: 1;
 }
 
 .slideshow__arrows .fa-angle-left{
