@@ -16,9 +16,9 @@
     left: 0;
     top: 0;
     width: 100%;
+    height: 100%;
     opacity: 0;
     object-fit: cover;
-    object-position: 0 100%;
     transition: all 250ms ease-out;
 }
 
@@ -27,8 +27,30 @@
     z-index: 1;
     display: block;
     width: 100%;
-    top: calc(50% - 1rem);
+    top: calc(50% - 7rem);
     font-size: 14rem;
+}
+
+.slideshow__markers {
+    position: absolute;
+    display: flex;
+    bottom: 3rem;
+    width: 100%;
+    height: 4rem;
+    padding: 0 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.slideshow__markers-dot {
+    background-color: white;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    opacity: 0.4;
+    transition: opacity 250ms ease-out;
+}
+.slideshow__markers-dot--active{
+    opacity: 1;
 }
 
 /* css states */

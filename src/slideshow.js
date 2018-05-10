@@ -40,6 +40,17 @@ function createSlides(element, pictures) {
         element.appendChild(image);
     });
 }
+
+function createMarkers(element, pictures) {
+    let markerContainer = document.createElement('div');
+    markerContainer.classList.add('slideshow__markers');
+    pictures.forEach(item => {
+        let dot = document.createElement('div');
+        dot.classList.add('slideshow__markers-dot');
+        markerContainer.appendChild(dot);
+    });
+    element.appendChild(markerContainer);
+}
 /**
  * slideShow will create a slide show based on images
  * first param is the element you want the slide show to apear in
@@ -51,9 +62,11 @@ function sliderShow(element, pictures) {
 
     createArrows(element);
     createSlides(element, pictures);
+    createMarkers(element, pictures);
 
     // select new elements
-    const imageElements = document.querySelectorAll('.slideshow > .slideshow__image');
+    const imageElements = document.querySelectorAll('.slideshow__image');
+    const markerElements = document.querySelectorAll('.slideshow__markers-dot');
     const arrowLeft = document.querySelector('.slideshow__arrows > .fa-angle-left');
     const arrowRight = document.querySelector('.slideshow__arrows > .fa-angle-right');
 
@@ -64,10 +77,15 @@ function sliderShow(element, pictures) {
     let isEndOfList = null;
     let isStartOfList = null;
 
-    let classes = {
-        active: 'slideshow__image--active',
-        previous: 'slideshow__image--previous',
-        next: 'slideshow__image--next',
+    let state = {
+        slideShow: {
+            active: 'slideshow__image--active',
+            previous: 'slideshow__image--previous',
+            next: 'slideshow__image--next'
+        },
+        markers: {
+            active: 'slideshow__markers-dot--active'
+        }
     }
 
     function startListCount() {
@@ -75,8 +93,10 @@ function sliderShow(element, pictures) {
         previous = active - 1;
         next = active + 1;
 
-        imageElements[active].classList.add(classes.active);
-        imageElements[next].classList.add(classes.next);
+        imageElements[active].classList.add(state.slideShow.active);
+        imageElements[next].classList.add(state.slideShow.next);
+
+        markerElements[active].classList.add(state.markers.active);
 
         lastIndex = imageElements.length - 1;
     }
@@ -84,21 +104,22 @@ function sliderShow(element, pictures) {
     startListCount();
 
     function setListStartEnd() {
-        isStartOfList = imageElements[0].classList.contains(classes.active);
-        isEndOfList = imageElements[lastIndex].classList.contains(classes.active);
+        isStartOfList = imageElements[0].classList.contains(state.slideShow.active);
+        isEndOfList = imageElements[lastIndex].classList.contains(state.slideShow.active);
     }
 
     function moveItem(direction) {
 
         // remove state
-        imageElements[active].classList.remove(classes.active);
+        imageElements[active].classList.remove(state.slideShow.active);
+        markerElements[active].classList.remove(state.markers.active);
 
         if (!isStartOfList) {
-            imageElements[previous].classList.remove(classes.previous);
+            imageElements[previous].classList.remove(state.slideShow.previous);
         }
 
         if (!isEndOfList) {
-            imageElements[next].classList.remove(classes.next);
+            imageElements[next].classList.remove(state.slideShow.next);
         }
 
         /**
@@ -110,17 +131,18 @@ function sliderShow(element, pictures) {
         previous = active - 1;
         next = active + 1;
 
-        imageElements[active].classList.add(classes.active);
+        imageElements[active].classList.add(state.slideShow.active);
+        markerElements[active].classList.add(state.markers.active);
 
         // after we set active we check to see what part of the list we are in
         setListStartEnd();
 
         if (!isStartOfList) {
-            imageElements[previous].classList.add(classes.previous);
+            imageElements[previous].classList.add(state.slideShow.previous);
         }
 
         if (!isEndOfList) {
-            imageElements[next].classList.add(classes.next);
+            imageElements[next].classList.add(state.slideShow.next);
         }
 
 
