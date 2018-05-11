@@ -5,6 +5,7 @@ Built a simple slide show in just JavaScript. It takes an array of string values
 
 ```javascript
 const slideShowElement = document.querySelector('.slideshow');
+const images = ['images/1.png', 'images/2.jpg', 'images/3.png'];
 /**
  * SlideShow
  * @param {node} html element 

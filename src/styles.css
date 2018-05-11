@@ -1,5 +1,6 @@
 :root{
     --arrow-color: rgba(255,255,255,0.4);
+    --speed: 500ms;
 }
 
 .slideshow{
@@ -20,7 +21,7 @@
     height: 100%;
     opacity: 0;
     object-fit: cover;
-    transition: all 250ms ease-out;
+    transition: all var(--speed) ease-out;
 }
 .slideshow__image.slideshow__image--active{
     opacity: 1;
@@ -52,7 +53,7 @@
     border-radius: 1.5rem;
     opacity: 0.2;
     transform: scale(.7);
-    transition: all 250ms ease-out;
+    transition: all var(--speed) ease-out;
 }
 .slideshow__markers-dot--active{
     opacity: 1;
@@ -73,13 +74,13 @@
     position: absolute;
     left: 0;
     color:var(--arrow-color);
-    transition: color 250ms linear;
+    transition: color var(--speed) linear;
 }
 .slideshow__arrows .fa-angle-right{
     position: absolute;
     right: 0;
     color:var(--arrow-color);
-    transition: color 250ms linear;
+    transition: color var(--speed) linear;
 }
 .slideshow__arrows .fa-angle-left:hover,
 .slideshow__arrows .fa-angle-right:hover{

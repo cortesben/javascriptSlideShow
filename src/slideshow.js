@@ -238,13 +238,12 @@ function SlideShow(element, pictures) {
 };
 
 const images = [
-    `https://drscdn.500px.org/photo/255501013/q%3D80_m%3D1000/v2?webp=true&sig=0294efd39ac9533f89b8a1d5cbe9ad27515ad155bafc3b8d2247a8bc8469a53f`,
-    `https://drscdn.500px.org/photo/252057477/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=02a3fe5a928aadb8f20cf0096221eae280ed857398b4b02b7b97fa7823bf2f1f`,
-    `https://drscdn.500px.org/photo/228515001/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=61528ad3b1fcce1e795fe84d161b974f47fe241ae2b34cff478c88215e032935`,
-    `https://drscdn.500px.org/photo/228507937/q%3D80_m%3D1000/v2?webp=true&sig=da914fd34565e2602934c98cf7a690edb23e36958195e0437fba37a83730ffad`,
-    `https://drscdn.500px.org/photo/224672447/q%3D80_m%3D2000/v2?webp=true&sig=5feda356289ea65bb319f198cfca1334acc01658fa9dc68cd8d331d3ad4982ed`,
-    `https://drscdn.500px.org/photo/221493077/q%3D80_m%3D2000_k%3D1/v2?webp=true&sig=291d3acc9287ee2a483069897faa6802bba7db88b5dc6cf8ea37c64569f6ecaf`,
-    `https://drscdn.500px.org/photo/214727293/q%3D80_m%3D2000/v2?webp=true&sig=308c7196be21aede3a7a115eab4ed44253b034bcb5ac14db6c8389cc8442fdc9`,
+    `https://iso.500px.com/wp-content/uploads/2015/09/adventures_cover-1500x1000.jpeg`,
+    `https://iso.500px.com/wp-content/uploads/2015/08/dog1_Cover.jpeg`,
+    `https://iso.500px.com/wp-content/uploads/2016/01/puppy.jpg`,
+    `https://i.pinimg.com/originals/1e/d0/27/1ed027f86de5a13ef2022333f948a626.jpg`,
+    `http://ppcdn.500px.org/63071009/46ed3e7ef10d543bb213fd2e170796f294241a1e/4.jpg`,
+    `http://dailynewsdig.com/wp-content/uploads/2013/10/dog-stock-photos-3.jpg`
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
