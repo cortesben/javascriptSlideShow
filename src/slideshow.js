@@ -64,7 +64,7 @@ function createMarkers(element, pictures) {
  * @param {node} element 
  * @param {array} pictures 
  */
-function sliderShow(element, pictures) {
+function SlideShow(element, pictures) {
 
     /**
      * Create all HTML elements for slide show
@@ -145,7 +145,6 @@ function sliderShow(element, pictures) {
 
         s_imageElements[active].classList.add(state.slideShow.active);
         s_imageElements[next].classList.add(state.slideShow.next);
-
         s_markerElements[active].classList.add(state.markers.active);
 
         lastIndex = s_imageElements.length - 1;
@@ -250,5 +249,10 @@ const images = [
 
 document.addEventListener("DOMContentLoaded", () => {
     const slideShowElement = document.querySelector('.slideshow');
-    sliderShow(slideShowElement, images);
+    /**
+     * SlideShow
+     * @param {node} html element 
+     * @param {array} urls 
+     */
+    SlideShow(slideShowElement, images);
 });
